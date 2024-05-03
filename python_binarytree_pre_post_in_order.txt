@@ -1,0 +1,117 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri May  3 10:14:05 2024
+
+@author: balduse
+"""
+
+
+# binary tree search
+class BinaryTreeNode:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    
+ #####################   
+    def add_child(self,data):# adds child nodes to a node
+        
+        if data == self.data:#if data is same as the node do nothing
+            return
+        
+        if data < self.data:#check if less than the current node
+            # add data in left subtree
+            if self.left: # check if there is a left node
+                self.left.add_child(data)#recursively call add_child
+            else:
+                self.left = BinaryTreeNode(data)#add binarytreenode
+        else:
+            # add data in right subtree
+            if self.right: # check if thee is a right node
+                self.right.add_child(data)#recursively call add_child
+            else:
+                self.right= BinaryTreeNode(data)#add binarytreenode
+
+    
+ #####################     
+    def in_order_traversal(self): #LNR , visit Left, Node and Right
+        elements = []
+        
+        # visit the left side of tree 
+        if self.left:
+            elements += self.left.in_order_traversal()
+        
+        # append the data
+        elements.append(self.data)
+        
+        # visit right tree
+        if self.right:
+            elements += self.right.in_order_traversal()
+                   
+            
+        return elements
+ ##################### 
+    def pre_order_traversal(self): #NLR , visit node, left and Right
+        elements = []
+        
+        # append the data
+        elements.append(self.data)
+        
+        # visit the left side of tree 
+        if self.left:
+            elements += self.left.pre_order_traversal()
+        
+        # visit right tree
+        if self.right:
+            elements += self.right.pre_order_traversal()
+                   
+            
+        return elements  
+ #####################   
+    
+ ##################### 
+    def post_order_traversal(self): #LRN , visit left , Right and node
+        elements = []
+        
+        
+        
+        # visit the left side of tree 
+        if self.left:
+            elements += self.left.pre_order_traversal()
+        
+        # visit right tree
+        if self.right:
+            elements += self.right.pre_order_traversal()
+        
+        # append the data
+        elements.append(self.data)         
+            
+        return elements  
+ ##################### 
+def build_tree(elements): # helper method calls BinaryTreeNode
+    root = BinaryTreeNode(elements[0]) # first element as root node
+
+    for i in range(1,len(elements)): # going through the given list
+         root.add_child(elements[i])
+
+    return root           
+                            
+     
+ #####################                  
+if __name__ == '__main__':
+                
+    numbers = [15, 21, 3, 4 , 8 , 10, 11, 15, 21]
+    numbers_tree = build_tree(numbers)
+    print(numbers_tree.post_order_traversal())
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
