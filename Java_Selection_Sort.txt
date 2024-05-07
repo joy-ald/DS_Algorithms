@@ -1,0 +1,24 @@
+class SelectionSort { 
+    void sort(int arr[]) 
+    { 
+        int n = arr.length; 
+  
+        // outer for loop runs from 0 to n-1
+	// ith element is assigned as min
+	// In  the nested for loop, j starts from i+1 and go all the 	// way to n
+	// if we find anything less than than the ith element, it is 		// replaced
+        for (int i = 0; i < n - 1; i++) { 
+            // Find the minimum element in unsorted (or right) array 
+            int min_idx = i; 
+            for (int j = i + 1; j < n; j++) { 
+                if (arr[j] < arr[min_idx]) 
+                    min_idx = j; 
+            } 
+  
+            // Swap the found minimum element with the first 
+            // element 
+            int temp = arr[min_idx]; 
+            arr[min_idx] = arr[i]; 
+            arr[i] = temp; 
+        } 
+    } 
